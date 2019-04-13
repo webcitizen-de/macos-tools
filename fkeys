@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# this script toogles the function of the Fn keys
+# the executing app (shell) needs initially a clearance in the macOS system preferences (access / privacy)
+
+# TODO: let the script close the "System Preferences" beforehand otherwise it fails
+# TODO: show the current status
+
+osascript -e '
+tell application "System Preferences"
+    reveal anchor "keyboardTab" of pane "com.apple.preference.keyboard"
+end tell
+tell application "System Events" to tell process "System Preferences"
+    click checkbox 1 of tab group 1 of window 1
+end tell
+quit application "System Preferences"'

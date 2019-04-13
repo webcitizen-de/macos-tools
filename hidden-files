@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+#
+# Author: Christopher Engelmann
+# Filename: macOSHiddenFilesToogle
+# Synopsis: A simple toogle mechanism for Apple Finder to show or don't show hidden files
+#
+# Hint: You might want to move the script file into your Finder's icon toolbar to run it via mouseclick
+#
+# Ideas for improvement
+# 1. Avoid, that the script interpreter stays open after running the script
+# 1.1 It might be better to realise it as Python Script or SWIFT Cmd Line Tool
+# 2. Add a function, that automagically adds the script to the Finder's icon toolbar
+
+
+AppleShowAllFiles_status=$(defaults read com.apple.finder AppleShowAllFiles)
+
+if [[ $AppleShowAllFiles_status == "YES" ]]; then
+    defaults write com.apple.finder AppleShowAllFiles NO
+else
+    defaults write com.apple.finder AppleShowAllFiles YES
+fi
+echo "
+********************************************************************************
+********************************************************************************
+********************************************************************************
+
+I F   Y O U   S E E   T H I S   T E X T   H E R E !!!
+
+PLEASE CONFIGURE YOUR TERMINAL.APP
+MENU > CONFIGURATION > PROFILE > SHELL > \"CLOSE IF THE SHELL EXITED CLEANLY\"
+
+********************************************************************************
+********************************************************************************
+********************************************************************************
+"
+killall Finder /System/Library/CoreServices/Finder.app
+exit
